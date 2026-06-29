@@ -1,0 +1,30 @@
+TechWorld Laptop Store
+
+Product: TitanBook Pro 15
+
+Specifications:
+- Processor: Intel Core Ultra 7 155H
+- RAM: 32 GB DDR5
+- Storage: 1 TB NVMe SSD
+- Display: 15.6 inch OLED, 2880x1800
+- Graphics: NVIDIA RTX 4060 8GB
+- Battery Life: Up to 12 hours
+- Weight: 1.8 kg
+- Operating System: Windçows 11 Pro
+
+Price:
+$1,499
+
+Features:
+- AI-powered performance
+- Fingerprint login
+- Backlit keyboard
+- Thunderbolt 4 support
+- WiFi 7 connectivity
+
+Warranty:
+2 years manufacturer warranty.
+
+Store:
+TechWorld Laptop Store
+Customer Support: support@techworld.com

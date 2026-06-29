@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pymongo
+python-jose
+python-multipart
+openai
+google-generativeai
+pinecone
+sentence-transformers
