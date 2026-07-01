@@ -6,4 +6,4 @@ python-multipart
 openai
 google-generativeai
 pinecone
-sentence-transformers
+

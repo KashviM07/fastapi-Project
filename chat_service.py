@@ -1,13 +1,18 @@
 import google.generativeai as genai
 from fastapi import HTTPException
 
-genai.configure(
-    api_key="AQ.Ab8RN6IdFff9_eEXk1svsPlmOruIuxtnlZRJNrWLhb0rAKP9IA"
-)
+import os
+
+# Load from environment variable (safe for deployment)
+GCP_API_KEY = os.getenv("GCP_API_KEY")
+
+if not GCP_API_KEY:
+    raise ValueError("GCP_API_KEY is not set in environment variables")
+genai.configure(api_key=GCP_API_KEY)
 
 model = genai.GenerativeModel("gemini-2.5-flash")
 
-"""
+
 def generate_message(conversations):
     try:
         print(conversations)
@@ -31,38 +36,3 @@ def generate_message(conversations):
     except Exception as e:
         print("ERROR:", str(e))
         raise HTTPException(status_code=500, detail=str(e))
-"""
-from rag import retrieve_context
-
-def generate_message(conversations):
-
-    user_message = conversations[-1].content
-
-    context = retrieve_context(user_message)
-
-    history = []
-
-    for convo in conversations[:-1]:
-        history.append({
-            "role": "user" if convo.role == "user" else "model",
-            "parts": [convo.content]
-        })
-
-    chat = model.start_chat(history=history)
-
-    prompt = f"""
-    Answer only from this brochure.
-
-    Context:
-    {context}
-
-    Question:
-    {user_message}
-
-    If the answer is not in the brochure,
-    say "Information not available in brochure."
-    """
-
-    response = chat.send_message(prompt)
-
-    return response.text
