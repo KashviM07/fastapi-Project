@@ -1,16 +1,16 @@
 import google.generativeai as genai
 from fastapi import HTTPException
 
-import os
+from config import get_env
+
 
 # Load from environment variable (safe for deployment)
-GCP_API_KEY = os.getenv("GCP_API_KEY")
+GCP_API_KEY = get_env("GCP_API_KEY")
+GEMINI_MODEL_NAME = get_env("GEMINI_MODEL_NAME", "gemini-2.5-flash")
 
-if not GCP_API_KEY:
-    raise ValueError("GCP_API_KEY is not set in environment variables")
 genai.configure(api_key=GCP_API_KEY)
 
-model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel(GEMINI_MODEL_NAME)
 
 
 def generate_message(conversations):

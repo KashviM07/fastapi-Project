@@ -3,15 +3,19 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 
-SECRET_KEY = "mysecretkey"
+from config import get_env
+
+
+SECRET_KEY = get_env("JWT_SECRET_KEY")
 ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_HOURS = int(get_env("ACCESS_TOKEN_EXPIRE_HOURS", "1"))
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 def create_token(username):
     payload = {
         "sub": username,
-        "exp": datetime.utcnow() + timedelta(hours=1)
+        "exp": datetime.utcnow() + timedelta(hours=ACCESS_TOKEN_EXPIRE_HOURS)
     }
 
     return jwt.encode(
